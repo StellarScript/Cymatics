@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
+import { env } from '@client/env.mjs';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
-      url: `/`,
+      url: `${env.BASE_URL}`,
       lastModified: new Date(),
     },
   ];

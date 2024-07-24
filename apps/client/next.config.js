@@ -2,6 +2,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
+import './src/env.mjs';
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}

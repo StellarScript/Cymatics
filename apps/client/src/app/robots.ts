@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { env } from '@client/env.mjs';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin'],
       },
     ],
-    sitemap: `/sitemap.xml`,
+    sitemap: `${env.BASE_URL}/sitemap.xml`,
   };
 }
