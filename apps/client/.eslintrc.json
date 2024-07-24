@@ -5,6 +5,12 @@
     "next/core-web-vitals",
     "../../.eslintrc.json"
   ],
+  "settings": {
+    "tailwindcss": {
+      "callees": ["classnames", "clsx", "cva", "cn", "className"],
+      "config": "./tailwind.config.js"
+    }
+  },
   "ignorePatterns": ["!**/*", ".next/**/*"],
   "overrides": [
     {

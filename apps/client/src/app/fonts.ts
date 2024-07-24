@@ -12,7 +12,7 @@ export const walsheimBold = localFont({
   weight: '700',
   style: 'normal',
   display: 'swap',
-  src: '/GT-Walsheim-Pro-Bold.ttf',
+  src: '/fonts/GT-Walsheim-Pro-Bold.ttf',
   variable: '--font-walsheim-bold',
 });
 
