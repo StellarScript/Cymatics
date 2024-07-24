@@ -4,7 +4,6 @@
 dist
 tmp
 /out-tsc
-.env
 
 # dependencies
 node_modules
@@ -40,17 +39,8 @@ testem.log
 Thumbs.db
 
 .nx/cache
-.nx
+.nx/workspace-data
 
 # Next.js
 .next
 out
-
-# CDK
-cdk.out
-cdk.context.json
-
-# prisma
-migrations
-db.sql
-db.sql-journal
