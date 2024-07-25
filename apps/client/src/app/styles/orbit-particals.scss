@@ -1,9 +1,9 @@
-$total: 300; // total particles
-$orb-size: 300px; // Increased orb size
-$min-particle-size: 1px;
-$max-particle-size: 4px;
+$total: 500; // total particles
+$orb-size: 600px; // Increased orb size
+$particle-size: 2px;
 $time: 14s;
 $base-hue: 0; // change for different colors (180 is nice)
+$max-translate-z: 250px; // Maximum translation on Z-axis
 
 html,
 body {
@@ -19,7 +19,7 @@ body {
   overflow: hidden; // no scrollbars
 }
 
-.wrap {
+.orbit-wrap {
   position: relative;
   width: $orb-size; // Width of the orb
   height: $orb-size; // Height of the orb
@@ -34,14 +34,12 @@ body {
   }
 }
 
-.c {
+.orbit {
   position: absolute;
   top: 50%; // Center the particle vertically
   left: 50%; // Center the particle horizontally
-  width: random($max-particle-size - $min-particle-size + 1) +
-    $min-particle-size;
-  height: random($max-particle-size - $min-particle-size + 1) +
-    $min-particle-size;
+  width: $particle-size;
+  height: $particle-size;
   transform: translate(
     -50%,
     -50%
@@ -53,29 +51,30 @@ body {
 @for $i from 1 through $total {
   $z: (random(360) * 1deg); // random angle to rotateZ
   $y: (random(360) * 1deg); // random to rotateX
-  $hue: ((360 / $total * $i) + $base-hue); // set hue
+  $hue: ((40 / $total * $i) + $base-hue); // set hue
 
-  .c-#{$i} {
+  .orbit-#{$i} {
     // grab the nth particle
-    animation: orbit#{$i} $time infinite ease-in-out;
+    animation: orbit#{$i} $time infinite;
     animation-delay: ($i * 0.01s);
     background-color: hsla($hue, 100%, 50%, 1);
   }
 
   @keyframes orbit#{$i} {
-    0%,
     20% {
-      opacity: 0;
-      transform: rotateZ(-$z) rotateY($y) translateX(0) rotateZ($z);
+      opacity: 1; // fade in
+      transform: rotateZ(-$z) rotateY($y) translateX($orb-size) rotateZ($z)
+        translateZ(0);
     }
     30%,
-    70% {
-      opacity: 1; // fade in and hold
-      transform: rotateZ(-$z) rotateY($y) translateX($orb-size) rotateZ($z);
+    80% {
+      transform: rotateZ(-$z) rotateY($y) translateX($orb-size) rotateZ($z)
+        translateZ($max-translate-z);
+      opacity: 1;
     }
     100% {
-      opacity: 0; // fade out
-      transform: rotateZ(-$z) rotateY($y) translateX($orb-size * 3) rotateZ($z);
+      transform: rotateZ(-$z) rotateY($y) translateX($orb-size * 3) rotateZ($z)
+        translateZ($max-translate-z);
     }
   }
 }
