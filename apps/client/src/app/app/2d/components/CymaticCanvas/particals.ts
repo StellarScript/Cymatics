@@ -1,7 +1,7 @@
 import p5 from 'p5';
 import { chladni } from './math';
 
-export interface Sliders {
+export interface Params {
   m: number;
   n: number;
   a: number;
@@ -29,7 +29,7 @@ export class Particle {
     this.updateOffsets();
   }
 
-  move(sliders: Sliders) {
+  move(sliders: Params) {
     const eq = chladni(
       this.x,
       this.y,

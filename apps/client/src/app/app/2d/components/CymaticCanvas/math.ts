@@ -12,3 +12,7 @@ export const chladni = (
 ) =>
   a * Math.sin(PI * n * x) * Math.sin(PI * m * y) +
   b * Math.sin(PI * m * x) * Math.sin(PI * n * y);
+
+export const lerp = (start: number, end: number, amt: number) => {
+  return (1 - amt) * start + amt * end;
+};
