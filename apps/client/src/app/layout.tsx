@@ -3,7 +3,7 @@ import * as fonts from '@client/app/fonts';
 import './styles/global.css';
 
 export const metadata = {
-  title: 'Welcome',
+  title: 'App',
   description: 'Cymatic Visulaization',
 };
 
@@ -16,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
+          'w-full h-screen relative overflow-hidden',
           fonts.walsheimBlack.variable,
           fonts.walsheimBold.variable,
           fonts.walsheimMedium.variable,

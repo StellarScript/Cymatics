@@ -1,0 +1,81 @@
+$total: 300; // total particles
+$orb-size: 300px; // Increased orb size
+$min-particle-size: 1px;
+$max-particle-size: 4px;
+$time: 14s;
+$base-hue: 0; // change for different colors (180 is nice)
+
+html,
+body {
+  height: 100%;
+  margin: 0; // Ensure there is no default margin
+  display: flex;
+  justify-content: center;
+  align-items: center; // Center content vertically and horizontally
+}
+
+body {
+  background: black;
+  overflow: hidden; // no scrollbars
+}
+
+.wrap {
+  position: relative;
+  width: $orb-size; // Width of the orb
+  height: $orb-size; // Height of the orb
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  animation: rotate $time infinite linear; // rotate orb
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotateY(360deg) rotateX(360deg);
+  }
+}
+
+.c {
+  position: absolute;
+  top: 50%; // Center the particle vertically
+  left: 50%; // Center the particle horizontally
+  width: random($max-particle-size - $min-particle-size + 1) +
+    $min-particle-size;
+  height: random($max-particle-size - $min-particle-size + 1) +
+    $min-particle-size;
+  transform: translate(
+    -50%,
+    -50%
+  ); // Correct for the dimension of the particle itself
+  border-radius: 50%;
+  opacity: 0;
+}
+
+@for $i from 1 through $total {
+  $z: (random(360) * 1deg); // random angle to rotateZ
+  $y: (random(360) * 1deg); // random to rotateX
+  $hue: ((360 / $total * $i) + $base-hue); // set hue
+
+  .c-#{$i} {
+    // grab the nth particle
+    animation: orbit#{$i} $time infinite ease-in-out;
+    animation-delay: ($i * 0.01s);
+    background-color: hsla($hue, 100%, 50%, 1);
+  }
+
+  @keyframes orbit#{$i} {
+    0%,
+    20% {
+      opacity: 0;
+      transform: rotateZ(-$z) rotateY($y) translateX(0) rotateZ($z);
+    }
+    30%,
+    70% {
+      opacity: 1; // fade in and hold
+      transform: rotateZ(-$z) rotateY($y) translateX($orb-size) rotateZ($z);
+    }
+    100% {
+      opacity: 0; // fade out
+      transform: rotateZ(-$z) rotateY($y) translateX($orb-size * 3) rotateZ($z);
+    }
+  }
+}
