@@ -2,13 +2,17 @@
   "extends": [
     "plugin:@nx/react-typescript",
     "next",
+    "prettier",
     "next/core-web-vitals",
+    "plugin:tailwindcss/recommended",
     "../../.eslintrc.json"
   ],
   "settings": {
     "tailwindcss": {
       "callees": ["classnames", "clsx", "cva", "cn", "className"],
-      "config": "./tailwind.config.js"
+      "config": "./tailwind.config.js",
+      "classnames": ["orbit-wrap"],
+      "whitelist": ["orbit-wrap", "orbit", "orbit-"]
     }
   },
   "ignorePatterns": ["!**/*", ".next/**/*"],
