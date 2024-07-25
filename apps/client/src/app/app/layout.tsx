@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <main className="size-full flex flex-col items-center justify-center">
+    <main className="flex size-full flex-col items-center justify-center">
       {children}
     </main>
   );

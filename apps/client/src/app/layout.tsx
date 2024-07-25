@@ -16,13 +16,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'w-full h-screen relative overflow-hidden',
+          'relative h-screen w-full overflow-hidden',
           fonts.walsheimBlack.variable,
           fonts.walsheimBold.variable,
           fonts.walsheimMedium.variable,
           fonts.walsheimRegular.variable,
           fonts.walsheimLight.variable,
-          fonts.walsheimUltraLight.variable
+          fonts.walsheimUltraLight.variable,
         )}
       >
         {children}
