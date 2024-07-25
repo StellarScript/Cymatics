@@ -3,7 +3,7 @@ $orb-size: 600px; // Increased orb size
 $particle-size: 2px;
 $time: 14s;
 $base-hue: 0; // change for different colors (180 is nice)
-$max-translate-z: 250px; // Maximum translation on Z-axis
+$max-translate-z: 150px; // Maximum translation on Z-axis, reduced to bring closer to user
 
 html,
 body {
@@ -56,25 +56,32 @@ body {
   .orbit-#{$i} {
     // grab the nth particle
     animation: orbit#{$i} $time infinite;
-    animation-delay: ($i * 0.01s);
+    animation-delay: (
+      $i * 0.02s
+    ); // increased delay to reduce simultaneous particle animations
     background-color: hsla($hue, 100%, 50%, 1);
   }
 
   @keyframes orbit#{$i} {
+    0%,
     20% {
-      opacity: 1; // fade in
-      transform: rotateZ(-$z) rotateY($y) translateX($orb-size) rotateZ($z)
-        translateZ(0);
+      opacity: 0;
+      transform: rotateZ(-$z) rotateY($y) translateX(0) translateZ(0);
     }
-    30%,
-    80% {
-      transform: rotateZ(-$z) rotateY($y) translateX($orb-size) rotateZ($z)
-        translateZ($max-translate-z);
+    30% {
+      opacity: 1; // fade in
+      transform: rotateZ(-$z) rotateY($y) translateX($orb-size / 2)
+        translateZ($max-translate-z / 2);
+    }
+    70% {
       opacity: 1;
+      transform: rotateZ(-$z) rotateY($y) translateX($orb-size)
+        translateZ($max-translate-z);
     }
     100% {
-      transform: rotateZ(-$z) rotateY($y) translateX($orb-size * 3) rotateZ($z)
-        translateZ($max-translate-z);
+      opacity: 0;
+      transform: rotateZ(-$z) rotateY($y) translateX($orb-size * 1.5)
+        translateZ($max-translate-z * 1.5);
     }
   }
 }
