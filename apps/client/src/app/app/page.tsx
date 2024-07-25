@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { OrbitParticals } from '../components/OrbitParticals';
 
 export default function AppPage() {
@@ -20,11 +21,15 @@ export default function AppPage() {
                 </h2>
               </div>
               <div className="flex flex-wrap gap-3 justify-center">
-                <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#019863] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-                  <span className="truncate">3D Visualization</span>
+                <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#019863] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em]">
+                  <Link href="/app/3d" className="truncate px-4 py-3 ">
+                    3D Visualization
+                  </Link>
                 </button>
-                <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-                  <span className="truncate">2D Visualization</span>
+                <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal tracking-[0.015em]">
+                  <Link href="/app/2d" className="truncate  px-4 py-3">
+                    2D Visualization
+                  </Link>
                 </button>
               </div>
             </div>
