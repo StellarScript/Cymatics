@@ -1,66 +1,74 @@
 'use client';
 
+import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@client/lib/cn';
-import React, { useState, useRef } from 'react';
+
+const steps = [
+  '#335495',
+  '#224893',
+  '#1a53bd',
+  '#2769d3',
+  '#3f87dc',
+  '#55a5e7',
+  '#6fc5f0',
+  '#6fc5f0',
+];
 
 interface SliderProps {
-  label: string;
+  name: string;
+  min: number;
   max: number;
-  initialValue: number;
+  onChange?: (value: number) => void;
 }
 
-export const Slider: React.FC<SliderProps> = ({ label, max, initialValue }) => {
-  const [value, setValue] = useState(initialValue);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
+export const Slider: React.FC<SliderProps> = ({
+  name,
+  min = 0,
+  max,
+  onChange,
+}) => {
+  const [val, setVal] = useState<number>(min);
+  const step = (max - min) / (steps.length - 1);
+  const valueRef = useRef<number[]>([]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (isDragging.current) {
-      const rect = containerRef.current?.getBoundingClientRect?.();
-      if (rect) {
-        const offsetX = e.clientX - rect.left;
-        const segmentWidth = rect.width / max;
-        let newValue = Math.ceil(offsetX / segmentWidth);
-        newValue = Math.max(0, Math.min(newValue, max));
-        setValue(newValue);
-      }
-    }
+  useEffect(() => {
+    valueRef.current = Array.from(
+      { length: steps.length },
+      (_, i) => min + i * step,
+    );
+  }, [max, min, step]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const index = parseInt(e.target.value);
+    setVal(index);
+    onChange?.(valueRef.current[index]);
   };
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    isDragging.current = true;
-    handleMouseMove(e);
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
+  const handleOnClick = (index: number) => {
+    setVal(index);
+    onChange?.(valueRef.current[index]);
   };
 
   return (
-    <div className="mb-6">
-      <label className="mb-2 block text-sm font-medium">{label}</label>
+    <div className="relative flex items-center">
       <input
+        name={name}
         type="range"
         min="0"
-        max={max}
-        value={value}
-        className="hidden"
-        readOnly
+        max={steps.length - 1}
+        value={val}
+        step="1"
+        onChange={handleInputChange}
+        className="absolute h-5 w-full cursor-pointer opacity-0"
       />
-      <div
-        ref={containerRef}
-        className="mt-2 flex cursor-pointer"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      >
-        {Array.from({ length: max }).map((_, i) => (
+
+      <div className="flex w-full flex-row gap-0.5">
+        {steps.map((color, i) => (
           <div
             key={i}
-            className={cn(
-              'mr-0.5 size-6 rounded bg-[#1f2937]',
-              `${i < value ? 'bg-[#60a5fa]' : ''}`,
-            )}
+            className={cn('h-8 flex-1 cursor-pointer rounded')}
+            style={{ background: val >= i ? color : '#242424' }}
+            onClick={() => handleOnClick(i)}
           />
         ))}
       </div>
