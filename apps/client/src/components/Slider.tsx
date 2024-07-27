@@ -18,6 +18,7 @@ interface SliderProps {
   name: string;
   min: number;
   max: number;
+  step: number;
   onChange?: (value: number) => void;
 }
 
@@ -59,14 +60,14 @@ export const Slider: React.FC<SliderProps> = ({
         value={val}
         step="1"
         onChange={handleInputChange}
-        className="absolute h-5 w-full cursor-pointer opacity-0"
+        className="absolute h-8 w-[17rem] cursor-pointer opacity-0"
       />
 
       <div className="flex w-full flex-row gap-0.5">
         {steps.map((color, i) => (
           <div
             key={i}
-            className={cn('h-8 flex-1 cursor-pointer rounded')}
+            className={cn('size-8 cursor-pointer rounded')}
             style={{ background: val >= i ? color : '#242424' }}
             onClick={() => handleOnClick(i)}
           />
