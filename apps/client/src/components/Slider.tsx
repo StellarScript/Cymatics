@@ -1,78 +1,84 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@client/lib/cn';
+import React, { useState } from 'react';
 
-const steps = [
-  '#335495',
-  '#224893',
-  '#1a53bd',
-  '#2769d3',
-  '#3f87dc',
-  '#55a5e7',
-  '#6fc5f0',
-  '#6fc5f0',
-];
-
-interface SliderProps {
+interface RangeSliderProps {
   name: string;
   min: number;
   max: number;
   step: number;
-  onChange?: (value: number) => void;
+  onChange?: (name: string, value: number) => void;
 }
 
-export const Slider: React.FC<SliderProps> = ({
-  name,
-  min = 0,
+const MAX_SQUARES = 15;
+const COLOR_RANGE = [
+  '#6FC5F0',
+  '#5BB7E5',
+  '#519ADA',
+  '#4782CF',
+  '#3D6BC4',
+  '#3354B9',
+  '#2A3EAE',
+  '#2028A3',
+  '#1C239B',
+  '#181F90',
+  '#141B85',
+  '#10177A',
+  '#0C136F',
+  '#0A1073',
+  '#081068',
+  '#06105D',
+  '#041053',
+];
+
+const RangeSlider: React.FC<RangeSliderProps> = ({
+  min,
   max,
+  step,
+  name,
   onChange,
 }) => {
-  const [val, setVal] = useState<number>(min);
-  const step = (max - min) / (steps.length - 1);
-  const valueRef = useRef<number[]>([]);
+  const [value, setValue] = useState(min);
 
-  useEffect(() => {
-    valueRef.current = Array.from(
-      { length: steps.length },
-      (_, i) => min + i * step,
+  const onSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(Number(e.target.value));
+    onChange?.(e.target.name, Number(e.target.value));
+  };
+
+  const totalSquares = MAX_SQUARES;
+  const stepSize = (max - min) / totalSquares;
+  const squares = [];
+
+  for (let i = 0; i <= totalSquares; i++) {
+    squares.push(
+      <div
+        key={i}
+        style={{
+          background:
+            i <= (value - min) / stepSize ? COLOR_RANGE[i] : '#374151',
+        }}
+        className={cn('size-4 rounded-sm')}
+      />,
     );
-  }, [max, min, step]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const index = parseInt(e.target.value);
-    setVal(index);
-    onChange?.(valueRef.current[index]);
-  };
-
-  const handleOnClick = (index: number) => {
-    setVal(index);
-    onChange?.(valueRef.current[index]);
-  };
+  }
 
   return (
-    <div className="relative flex items-center">
+    <div className="mb-5 flex flex-col items-center">
       <input
         name={name}
         type="range"
-        min="0"
-        max={steps.length - 1}
-        value={val}
-        step="1"
-        onChange={handleInputChange}
-        className="absolute h-8 w-[17rem] cursor-pointer opacity-0"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={onSliderChange}
+        className="absolute w-72 cursor-pointer opacity-0"
       />
 
-      <div className="flex w-full flex-row gap-0.5">
-        {steps.map((color, i) => (
-          <div
-            key={i}
-            className={cn('size-8 cursor-pointer rounded')}
-            style={{ background: val >= i ? color : '#242424' }}
-            onClick={() => handleOnClick(i)}
-          />
-        ))}
-      </div>
+      <div className="mb-2 flex h-5 w-72 justify-between">{squares}</div>
     </div>
   );
 };
+
+export default RangeSlider;
