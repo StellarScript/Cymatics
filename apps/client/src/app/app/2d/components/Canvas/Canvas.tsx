@@ -6,6 +6,7 @@ import P5 from 'p5';
 import { Particle } from './particals';
 import { adjustSize, canvasSizes } from './resize';
 import { lerp, chladni } from '@client/app/util/math';
+import { cymaticInputDefaults } from '@client/app/util/constants';
 import { Control, ControlInputs } from '@client/app/components/Control';
 
 const defaultSettings = {
@@ -14,22 +15,13 @@ const defaultSettings = {
    drawHeatmap: false,
 };
 
-const defaultSliders: ControlInputs = {
-   frequencyX: 5,
-   frequencyY: 5,
-   amplitudeX: 1,
-   amplitudeY: 1,
-   vibration: 0.02,
-   particles: 20000,
-};
-
 export const Canvas: React.FC = () => {
    const isLoaded = useRef<boolean>(false);
    const canvasRef = useRef<HTMLDivElement>(null);
    const particles = useRef<Particle[]>([]);
 
    const settings = useRef(defaultSettings);
-   const sliders = useRef<ControlInputs>(defaultSliders);
+   const sliders = useRef<ControlInputs>(cymaticInputDefaults);
    const smoothSliders = useRef<ControlInputs>({ ...sliders.current });
 
    const toggleHeatMap = (state: boolean) => {

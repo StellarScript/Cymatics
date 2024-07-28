@@ -2,20 +2,14 @@
 
 import { useState } from 'react';
 import { ControlInputs } from '@client/app/components/Control';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { Particles } from './Particles';
+import { cymaticInputDefaults } from '@client/app/util/constants';
 
 export const CymaticCanvas = () => {
-   const [sliders, setSliders] = useState<ControlInputs>({
-      frequencyX: 5,
-      frequencyY: 5,
-      amplitudeX: 1,
-      amplitudeY: 1,
-      vibration: 0.02,
-      particles: 20000,
-   });
+   const [sliders, setSliders] = useState<ControlInputs>(cymaticInputDefaults);
 
    const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
