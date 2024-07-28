@@ -23,7 +23,7 @@ export const CymaticCanvas = () => {
 
    return (
       <div className="relative flex size-full flex-col lg:flex-row">
-         <div className="flex size-full lg:w-2/6">
+         <div className="flex size-full lg:w-2/6 pt-3">
             <Control inputs={sliders} onSliderChange={handleSliderChange}>
                <Link
                   className="hover:bg-light-100 rounded-md border border-gray-100 bg-light-200 text-dark-100 hover:text-dark-200 p-3 transition-colors transition-200"
