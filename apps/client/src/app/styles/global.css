@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+   :root {
+      /* Colors */
+      --primary-950: 34 35 66;
+      --primary-900: 42 43 81;
+      --primary-800: 55 70 108;
+      --primary-700: 87 91 199;
+      --primary-600: 92 103 199;
+      --primary-500: 102 107 226;
+      --primary-400: 94 106 210;
+      --primary-300: 110 121 214;
+      --primary-200: 116 119 240;
+      --primary-100: 108 121 255;
+   }
+}
