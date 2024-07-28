@@ -8,7 +8,7 @@ const CymaticCanvas = dynamic(() => import('./components/Canvas').then((C) => C.
 
 export default async function Visulaization3D() {
    return (
-      <div className="w-full overflow-auto scroll-smooth">
+      <div className="size-full overflow-auto scroll-smooth">
          <CymaticCanvas />
       </div>
    );
