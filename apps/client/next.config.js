@@ -17,6 +17,10 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   reactStrictMode: false,
+  webpack: (config) => {
+    config.externals = [...config.externals, 'canvas', 'jsdom'];
+    return config;
+  },
 };
 
 const plugins = [
