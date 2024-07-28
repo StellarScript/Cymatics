@@ -1,13 +1,15 @@
 'use server';
 
-import { CymaticCanvas } from './components/Canvas';
+import dynamic from 'next/dynamic';
+
+const CymaticCanvas = dynamic(() => import('./components/Canvas').then((C) => C.CymaticCanvas), {
+   ssr: false,
+});
 
 export default async function Visulaization2D() {
-  return (
-    <div className="flex w-full flex-col items-center">
-      <div className="flex w-full flex-row justify-center">
-        <CymaticCanvas />
+   return (
+      <div className="w-full overflow-auto scroll-smooth">
+         <CymaticCanvas />
       </div>
-    </div>
-  );
+   );
 }
