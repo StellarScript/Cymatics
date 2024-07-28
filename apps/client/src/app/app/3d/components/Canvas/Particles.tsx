@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { Particle } from './particle';
+import { useFrame } from '@react-three/fiber';
 import { ControlInputs } from '@client/app/components/Control';
+import { Particle } from './particle';
 
 interface ParticlesProps {
    sliders: ControlInputs;
