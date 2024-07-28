@@ -1,5 +1,5 @@
 export const metadata = {
-   title: 'cymatic 2D',
+   title: '2D | Visualization',
    description: 'cymatic visualization 2D',
 };
 
