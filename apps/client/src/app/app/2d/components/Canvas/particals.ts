@@ -1,6 +1,6 @@
 import p5 from 'p5';
 import { chladni } from './math';
-import { SliderProps } from './types';
+import { ControlInputs } from './types';
 
 export class Particle {
    p: p5;
@@ -20,7 +20,7 @@ export class Particle {
       this.updateOffsets();
    }
 
-   move(sliders: SliderProps) {
+   move(sliders: ControlInputs) {
       const eq = chladni(
          this.x,
          this.y,

@@ -1,8 +1,8 @@
-export interface SliderProps {
-   frequencyX: number; //m
-   frequencyY: number; //n
-   amplitudeX: number; //a
-   amplitudeY: number; //b
-   vibration: number; //v
-   particles: number; //num
+export interface ControlInputs {
+   frequencyX: number;
+   frequencyY: number;
+   amplitudeX: number;
+   amplitudeY: number;
+   vibration: number;
+   particles: number;
 }

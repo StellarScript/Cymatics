@@ -3,19 +3,19 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import RangeSlider from '@client/components/Slider';
-import { SliderProps } from './types';
+import { ControlInputs } from './types';
 
 interface ControlProps {
-   sliders: SliderProps;
+   inputs: ControlInputs;
    onSliderChange: (name: string, value: number) => void;
    toggleHeatMap: () => void;
 }
 
-export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap, sliders }) => {
-   const [heatMap, setToggleHeatMap] = useState(false);
+export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap, inputs }) => {
+   const [heatMap, setHeatMap] = useState(false);
 
    const handleToggleHeatMap = () => {
-      setToggleHeatMap(!heatMap);
+      setHeatMap(!heatMap);
       toggleHeatMap();
    };
 
@@ -36,7 +36,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                   name="m"
                   step={1}
                   onChange={onSliderChange}
-                  defaultValue={sliders.frequencyX}
+                  defaultValue={inputs.frequencyX}
                />
             </label>
             <label className="flex flex-col items-center">
@@ -47,7 +47,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                   name="n"
                   step={1}
                   onChange={onSliderChange}
-                  defaultValue={sliders.frequencyY}
+                  defaultValue={inputs.frequencyY}
                />
             </label>
 
@@ -59,7 +59,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                   name="a"
                   step={0.1}
                   onChange={onSliderChange}
-                  defaultValue={sliders.amplitudeX}
+                  defaultValue={inputs.amplitudeX}
                />
             </label>
 
@@ -71,7 +71,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                   name="b"
                   step={0.1}
                   onChange={onSliderChange}
-                  defaultValue={sliders.amplitudeY}
+                  defaultValue={inputs.amplitudeY}
                />
             </label>
          </fieldset>
@@ -85,7 +85,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                   max={0.1}
                   step={0.01}
                   onChange={onSliderChange}
-                  defaultValue={sliders.vibration}
+                  defaultValue={inputs.vibration}
                />
             </label>
 
@@ -97,7 +97,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                   max={20000}
                   step={2000}
                   onChange={onSliderChange}
-                  defaultValue={sliders.particles}
+                  defaultValue={inputs.particles}
                />
             </label>
          </fieldset>
