@@ -1,8 +1,11 @@
 'use client';
 
-import { useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import P5 from 'p5';
+
 import { Control } from './Control';
 import { SliderProps } from './types';
+import { adjustSize, canvasSizes } from './resize';
 
 const defaultSettings = {
    nParticles: 20000,
@@ -20,6 +23,7 @@ const defaultSliders: SliderProps = {
 };
 
 export const Canvas: React.FC = () => {
+   const isLoaded = useRef<boolean>(false);
    const canvasRef = useRef<HTMLDivElement>(null);
 
    const settings = useRef(defaultSettings);
@@ -38,6 +42,30 @@ export const Canvas: React.FC = () => {
          [name]: value,
       };
    };
+
+   const sketch = useCallback((p: P5) => {
+      //
+   }, []);
+
+   useEffect(() => {
+      const canvas = new P5(sketch);
+
+      const handleResize = () => {
+         canvas.resizeCanvas(canvasSizes(window.innerWidth), adjustSize(window.innerHeight, 3));
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      if (!isLoaded.current) {
+         handleResize();
+      }
+
+      return () => {
+         window.addEventListener('resize', handleResize);
+         canvas.remove();
+         isLoaded.current = true;
+      };
+   }, [settings, sketch]);
 
    return (
       <div className="relative flex size-full flex-col lg:flex-row">
