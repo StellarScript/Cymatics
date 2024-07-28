@@ -13,13 +13,13 @@ export interface ControlInputs {
    particles: number;
 }
 
-interface ControlProps {
+interface ControlProps extends React.PropsWithChildren {
    inputs: ControlInputs;
    onSliderChange: (name: string, value: number) => void;
-   toggleHeatMap: (state: boolean) => void;
+   toggleHeatMap?: (state: boolean) => void;
 }
 
-export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap, inputs }) => {
+export const Control: React.FC<ControlProps> = ({ children, onSliderChange, toggleHeatMap, inputs }) => {
    return (
       <div className="flex w-full flex-col items-center justify-center p-3 lg:justify-start">
          <fieldset className="w-80">
@@ -97,19 +97,14 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                />
             </label>
 
-            <div className="mb-5 w-full">
-               <ToggleTabs firstTabLabel="Heat Map" secondTabLabel="Cymatics" onChange={toggleHeatMap} />
-            </div>
+            {toggleHeatMap && (
+               <div className="mb-5 w-full">
+                  <ToggleTabs firstTabLabel="Heat Map" secondTabLabel="Cymatics" onChange={toggleHeatMap} />
+               </div>
+            )}
          </fieldset>
 
-         <div className="mt-6 flex justify-center">
-            <Link
-               className="hover:bg-light-100 rounded-md border border-gray-100 bg-light-200 text-dark-100 hover:text-dark-200 p-3 transition-colors transition-200"
-               href={'/app/3d'}
-            >
-               View in 3D
-            </Link>
-         </div>
+         {children && <div className="mt-6 flex justify-center">{children}</div>}
       </div>
    );
 };
