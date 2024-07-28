@@ -3,7 +3,7 @@
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
-const Canvas = dynamic(() => import('./Canvas').then((C) => C.Canvas), {
+const Canvas = dynamic(() => import('./Canvas').then((C) => C.CymaticCanvas), {
    ssr: false,
 });
 
