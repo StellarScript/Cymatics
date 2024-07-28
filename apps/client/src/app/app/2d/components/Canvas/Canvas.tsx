@@ -33,10 +33,10 @@ export const Canvas: React.FC = () => {
    const sliders = useRef<ControlInputs>(defaultSliders);
    const smoothSliders = useRef<ControlInputs>({ ...sliders.current });
 
-   const toggleHeatMap = () => {
+   const toggleHeatMap = (state: boolean) => {
       settings.current = {
          ...settings.current,
-         drawHeatmap: !settings.current.drawHeatmap,
+         drawHeatmap: state,
       };
    };
 

@@ -1,30 +1,22 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import RangeSlider from '@client/components/Slider';
+import { ToggleTabs } from '@client/components/ToggleTabs';
 import { ControlInputs } from './types';
-import { Button } from '@client/components/Button';
 
 interface ControlProps {
    inputs: ControlInputs;
    onSliderChange: (name: string, value: number) => void;
-   toggleHeatMap: () => void;
+   toggleHeatMap: (state: boolean) => void;
 }
 
 export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap, inputs }) => {
-   const [heatMap, setHeatMap] = useState(false);
-
-   const handleToggleHeatMap = () => {
-      setHeatMap(!heatMap);
-      toggleHeatMap();
-   };
-
    return (
       <div className="flex w-full flex-col items-center justify-center p-3 lg:justify-start">
          <fieldset className="w-80">
             <div className="mb-5 w-full">
-               <Button onClick={handleToggleHeatMap}>Heat Map</Button>
+               <ToggleTabs firstTabLabel="Heat Map" secondTabLabel="Cymatics" onChange={toggleHeatMap} />
             </div>
 
             <label className="flex flex-col items-center">
