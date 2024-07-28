@@ -15,12 +15,8 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
    return (
       <div className="flex w-full flex-col items-center justify-center p-3 lg:justify-start">
          <fieldset className="w-80">
-            <div className="mb-5 w-full">
-               <ToggleTabs firstTabLabel="Heat Map" secondTabLabel="Cymatics" onChange={toggleHeatMap} />
-            </div>
-
             <label className="flex flex-col items-center">
-               <small className="w-72">Wave Frequency in x-direction</small>
+               <Label>Wave Frequency in x-direction</Label>
                <RangeSlider
                   min={1}
                   max={16}
@@ -31,7 +27,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                />
             </label>
             <label className="flex flex-col items-center">
-               <small className="w-72">wave Frequency in y-direction</small>
+               <Label>Wave Frequency in y-direction</Label>
                <RangeSlider
                   min={1}
                   max={16}
@@ -43,7 +39,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
             </label>
 
             <label className="flex flex-col items-center">
-               <small className="w-72">Amplitude Coefficient for sin(nx)sin(my)</small>
+               <Label>Amplitude Coefficient X</Label>
                <RangeSlider
                   min={-2}
                   max={2}
@@ -55,7 +51,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
             </label>
 
             <label className="flex flex-col items-center">
-               <small className="w-72">Amplitude Coefficient for sin(mx)sin(ny)</small>
+               <Label>Amplitude Coefficient Y</Label>
                <RangeSlider
                   min={-2}
                   max={2}
@@ -69,7 +65,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
 
          <fieldset className="w-80">
             <label className="flex flex-col items-center">
-               <small className="w-72">Vibration Strength:</small>
+               <Label>Vibration Strength</Label>
                <RangeSlider
                   name="vibration"
                   min={0.01}
@@ -81,7 +77,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
             </label>
 
             <label className="flex flex-col items-center">
-               <small className="w-72">Number of Particles:</small>
+               <Label>Number of Particles</Label>
                <RangeSlider
                   name="particles"
                   min={2000}
@@ -91,13 +87,26 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                   defaultValue={inputs.particles}
                />
             </label>
+
+            <div className="mb-5 w-full">
+               <ToggleTabs firstTabLabel="Heat Map" secondTabLabel="Cymatics" onChange={toggleHeatMap} />
+            </div>
          </fieldset>
 
          <div className="mt-6 flex justify-center">
-            <Link className="rounded border border-gray-100 p-3" href={'/app/3d'}>
+            <Link
+               className="hover:bg-light-100 rounded-md border border-gray-100 bg-light-200 text-dark-100 hover:text-dark-200 p-3 transition-colors transition-200"
+               href={'/app/3d'}
+            >
                View in 3D
             </Link>
          </div>
       </div>
    );
 };
+
+const Label: React.FC<React.PropsWithChildren> = ({ children }) => (
+   <small className="w-72 text-dark-100">
+      <>{children}</>
+   </small>
+);
