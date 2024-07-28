@@ -1,9 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useRef } from 'react';
+import { lerp, chladni } from '@client/app/util/math';
 import P5 from 'p5';
 
-import { chladni, lerp } from './math';
 import { Particle } from './particals';
 import { ControlInputs } from './types';
 import { adjustSize, canvasSizes } from './resize';
