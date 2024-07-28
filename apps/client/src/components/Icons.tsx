@@ -3,7 +3,7 @@ import type { SVGAttributes } from 'react';
 export type IconProps = SVGAttributes<SVGElement>;
 
 export const Icons = {
-   InfoCircle: (props?: IconProps) => {
+   InfoCircle: (props?: IconProps) => (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
          <g id="info-circle">
             <path
@@ -15,6 +15,6 @@ export const Icons = {
                strokeLinejoin="round"
             />
          </g>
-      </svg>;
-   },
+      </svg>
+   ),
 };
