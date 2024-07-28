@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import RangeSlider from '@client/components/Slider';
 import { ControlInputs } from './types';
+import { Button } from '@client/components/Button';
 
 interface ControlProps {
    inputs: ControlInputs;
@@ -23,9 +24,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
       <div className="flex w-full flex-col items-center justify-center p-3 lg:justify-start">
          <fieldset className="w-80">
             <div className="mb-5 w-full">
-               <button className="border border-gray-100 p-3" onClick={handleToggleHeatMap}>
-                  Heat Map
-               </button>
+               <Button onClick={handleToggleHeatMap}>Heat Map</Button>
             </div>
 
             <label className="flex flex-col items-center">
@@ -33,7 +32,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                <RangeSlider
                   min={1}
                   max={16}
-                  name="m"
+                  name="frequencyX"
                   step={1}
                   onChange={onSliderChange}
                   defaultValue={inputs.frequencyX}
@@ -44,7 +43,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                <RangeSlider
                   min={1}
                   max={16}
-                  name="n"
+                  name="frequencyY"
                   step={1}
                   onChange={onSliderChange}
                   defaultValue={inputs.frequencyY}
@@ -56,7 +55,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                <RangeSlider
                   min={-2}
                   max={2}
-                  name="a"
+                  name="amplitudeX"
                   step={0.1}
                   onChange={onSliderChange}
                   defaultValue={inputs.amplitudeX}
@@ -68,7 +67,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                <RangeSlider
                   min={-2}
                   max={2}
-                  name="b"
+                  name="amplitudeY"
                   step={0.1}
                   onChange={onSliderChange}
                   defaultValue={inputs.amplitudeY}
@@ -80,7 +79,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
             <label className="flex flex-col items-center">
                <small className="w-72">Vibration Strength:</small>
                <RangeSlider
-                  name="v"
+                  name="vibration"
                   min={0.01}
                   max={0.1}
                   step={0.01}
@@ -92,7 +91,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
             <label className="flex flex-col items-center">
                <small className="w-72">Number of Particles:</small>
                <RangeSlider
-                  name="num"
+                  name="particles"
                   min={2000}
                   max={20000}
                   step={2000}
