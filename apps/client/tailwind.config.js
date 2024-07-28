@@ -40,6 +40,11 @@ module.exports = {
                100: 'rgb(var(--white-100) / <alpha-value>)',
                200: 'rgb(var(--white-200) / <alpha-value>)',
             },
+
+            dark: {
+               100: 'rgb(var(--dark-100) / <alpha-value>)',
+               200: 'rgb(var(--dark-200) / <alpha-value>)',
+            },
          },
       },
    },
