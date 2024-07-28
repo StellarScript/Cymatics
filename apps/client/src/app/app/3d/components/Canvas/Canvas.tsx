@@ -1,125 +1,54 @@
 'use client';
 
 import { useState } from 'react';
-import { ControlInputs } from '@client/app/components/Control';
+import Link from 'next/link';
+import { cymaticInputDefaults } from '@client/app/util/constants';
+import { Control, ControlInputs } from '@client/app/components/Control';
+import * as THREE from 'three';
+
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
-import { cymaticInputDefaults } from '@client/app/util/constants';
 import { Particles } from './Particles';
 
 export const CymaticCanvas = () => {
    const [sliders, setSliders] = useState<ControlInputs>(cymaticInputDefaults);
 
-   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
+   const handleSliderChange = (name: string, value: number) => {
       setSliders((prev) => ({
          ...prev,
          [name]: Number(value),
       }));
    };
 
+   const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+   camera.zoom = 50;
+
    return (
-      <div style={{ height: '100vh' }}>
-         <Canvas>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} />
-            <Particles sliders={sliders} />
-            <OrbitControls />
-            <EffectComposer>
-               <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
-            </EffectComposer>
-         </Canvas>
-         <div
-            style={{
-               position: 'absolute',
-               top: 0,
-               left: 0,
-               padding: '10px',
-               backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            }}
-         >
-            <label>
-               m:
-               <input
-                  type="range"
-                  name="m"
-                  min="1"
-                  max="16"
-                  value={sliders.frequencyX}
-                  onChange={handleSliderChange}
-               />
-               {sliders.frequencyX}
-            </label>
-            <br />
-            <label>
-               n:
-               <input
-                  type="range"
-                  name="n"
-                  min="1"
-                  max="16"
-                  value={sliders.frequencyY}
-                  onChange={handleSliderChange}
-               />
-               {sliders.frequencyY}
-            </label>
-            <br />
-            <label>
-               a:
-               <input
-                  type="range"
-                  name="a"
-                  min="-2"
-                  max="2"
-                  step="0.1"
-                  value={sliders.amplitudeX}
-                  onChange={handleSliderChange}
-               />
-               {sliders.amplitudeX}
-            </label>
-            <br />
-            <label>
-               b:
-               <input
-                  type="range"
-                  name="b"
-                  min="-2"
-                  max="2"
-                  step="0.1"
-                  value={sliders.amplitudeY}
-                  onChange={handleSliderChange}
-               />
-               {sliders.amplitudeY}
-            </label>
-            <br />
-            <label>
-               Vibration Strength (v):
-               <input
-                  type="range"
-                  name="v"
-                  min="0.01"
-                  max="0.1"
-                  step="0.01"
-                  value={sliders.vibration}
-                  onChange={handleSliderChange}
-               />
-               {sliders.vibration}
-            </label>
-            <br />
-            <label>
-               Number of Particles:
-               <input
-                  type="range"
-                  name="num"
-                  min="2000"
-                  max="20000"
-                  step="1000"
-                  value={sliders.particles}
-                  onChange={handleSliderChange}
-               />
-               {sliders.particles}
-            </label>
+      <div className="relative flex size-full flex-col lg:flex-row">
+         <div className="flex size-full lg:w-2/6">
+            <Control inputs={sliders} onSliderChange={handleSliderChange}>
+               <Link
+                  className="hover:bg-light-100 rounded-md border border-gray-100 bg-light-200 text-dark-100 hover:text-dark-200 p-3 transition-colors transition-200"
+                  href={'/app/2d'}
+               >
+                  View in 2D
+               </Link>
+            </Control>
+         </div>
+
+         <div className="relative size-full lg:w-4/6">
+            <div className="size-full p-3">
+               <Canvas className="flex w-full justify-center">
+                  <ambientLight intensity={0.5} />
+                  <pointLight position={[10, 10, 10]} />
+                  <Particles sliders={sliders} />
+                  <OrbitControls panSpeed={0.5} zoomSpeed={0.4} camera={camera} />
+                  <EffectComposer>
+                     <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
+                  </EffectComposer>
+               </Canvas>
+            </div>
          </div>
       </div>
    );
