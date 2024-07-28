@@ -3,7 +3,15 @@
 import Link from 'next/link';
 import RangeSlider from '@client/components/Slider';
 import { ToggleTabs } from '@client/components/ToggleTabs';
-import { ControlInputs } from './types';
+
+export interface ControlInputs {
+   frequencyX: number;
+   frequencyY: number;
+   amplitudeX: number;
+   amplitudeY: number;
+   vibration: number;
+   particles: number;
+}
 
 interface ControlProps {
    inputs: ControlInputs;
