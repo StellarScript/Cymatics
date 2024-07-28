@@ -1,6 +1,6 @@
 import p5 from 'p5';
-import { ControlInputs } from './types';
 import { chladni } from '@client/app/util/math';
+import { ControlInputs } from '@client/app/components/Control';
 
 export class Particle {
    p: p5;

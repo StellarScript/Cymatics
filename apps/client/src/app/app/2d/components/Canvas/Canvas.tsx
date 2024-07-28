@@ -4,11 +4,9 @@ import { useCallback, useEffect, useRef } from 'react';
 import P5 from 'p5';
 
 import { Particle } from './particals';
-import { ControlInputs } from './types';
 import { adjustSize, canvasSizes } from './resize';
-
 import { lerp, chladni } from '@client/app/util/math';
-import { Control } from '@client/app/components/Control';
+import { Control, ControlInputs } from '@client/app/components/Control';
 
 const defaultSettings = {
    nParticles: 20000,

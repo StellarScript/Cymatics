@@ -34,6 +34,7 @@ export const Control: React.FC<ControlProps> = ({ onSliderChange, toggleHeatMap,
                   defaultValue={inputs.frequencyX}
                />
             </label>
+
             <label className="flex flex-col items-center">
                <Label>Wave Frequency in y-direction</Label>
                <RangeSlider
