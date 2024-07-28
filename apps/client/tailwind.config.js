@@ -35,6 +35,11 @@ module.exports = {
                800: 'rgb(var(--light-800) / <alpha-value>)',
                900: 'rgb(var(--light-900) / <alpha-value>)',
             },
+
+            white: {
+               100: 'rgb(var(--white-100) / <alpha-value>)',
+               200: 'rgb(var(--white-200) / <alpha-value>)',
+            },
          },
       },
    },
