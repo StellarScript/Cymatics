@@ -1,5 +1,5 @@
 'use client';
 
-export const CymaticCanvas: React.FC = () => {
+export const Canvas: React.FC = () => {
   return <></>;
 };
