@@ -1,60 +1,60 @@
 {
-  "name": "client",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/client",
-  "projectType": "application",
-  "tags": [],
-  "// targets": "to see all targets run: nx show project client --web",
-  "targets": {
-    "build": {
-      "executor": "@nx/next:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "generatePackageJson": true,
-        "outputPath": "dist/apps/client",
-        "tsConfig": "apps/client/tsconfig.json"
-      }
-    },
-
-    "serve:dev": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "dotenv -e .env -- nx serve client --configuration development"
-      }
-    },
-
-    "serve": {
-      "executor": "@nx/next:server",
-      "defaultConfiguration": "production",
-      "options": {
-        "buildTarget": "client:build",
-        "dev": true
+   "name": "client",
+   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+   "sourceRoot": "apps/client",
+   "projectType": "application",
+   "tags": [],
+   "// targets": "to see all targets run: nx show project client --web",
+   "targets": {
+      "build": {
+         "executor": "@nx/next:build",
+         "outputs": ["{options.outputPath}"],
+         "defaultConfiguration": "production",
+         "options": {
+            "generatePackageJson": true,
+            "outputPath": "dist/apps/client",
+            "tsConfig": "apps/client/tsconfig.json"
+         }
       },
-      "configurations": {
-        "development": {
-          "buildTarget": "client:build:development",
-          "dev": true
-        },
-        "production": {
-          "buildTarget": "client:build:production",
-          "dev": false
-        }
-      }
-    },
 
-    "typecheck": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "tsc --project apps/client/tsconfig.json --skipLibCheck --noEmit --incremental false"
-        ]
-      }
-    },
+      "serve:dev": {
+         "executor": "nx:run-commands",
+         "options": {
+            "command": "dotenv -e .env -- nx serve client --configuration development"
+         }
+      },
 
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    }
-  }
+      "serve": {
+         "executor": "@nx/next:server",
+         "defaultConfiguration": "production",
+         "options": {
+            "buildTarget": "client:build",
+            "dev": true
+         },
+         "configurations": {
+            "development": {
+               "buildTarget": "client:build:development",
+               "dev": true
+            },
+            "production": {
+               "buildTarget": "client:build:production",
+               "dev": false
+            }
+         }
+      },
+
+      "typecheck": {
+         "executor": "nx:run-commands",
+         "options": {
+            "commands": [
+               "tsc --project apps/client/tsconfig.json --skipLibCheck --noEmit --incremental false"
+            ]
+         }
+      },
+
+      "lint": {
+         "executor": "@nx/eslint:lint",
+         "outputs": ["{options.outputFile}"]
+      }
+   }
 }
