@@ -1,41 +1,41 @@
 {
-  "extends": [
-    "plugin:@nx/react-typescript",
-    "next",
-    "prettier",
-    "next/core-web-vitals",
-    "plugin:tailwindcss/recommended",
-    "../../.eslintrc.json"
-  ],
-  "settings": {
-    "tailwindcss": {
-      "callees": ["classnames", "clsx", "cva", "cn", "className"],
-      "config": "./tailwind.config.js",
-      "classnames": ["orbit-wrap"],
-      "whitelist": ["orbit-wrap", "orbit", "orbit-"]
-    }
-  },
-  "ignorePatterns": ["!**/*", ".next/**/*"],
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "@next/next/no-html-link-for-pages": ["error", "apps/client/pages"]
+   "extends": [
+      "plugin:@nx/react-typescript",
+      "next",
+      "prettier",
+      "next/core-web-vitals",
+      "plugin:tailwindcss/recommended",
+      "../../.eslintrc.json"
+   ],
+   "settings": {
+      "tailwindcss": {
+         "callees": ["classnames", "clsx", "cva", "cn", "className"],
+         "config": "./tailwind.config.js",
+         "classnames": ["orbit-wrap"],
+         "whitelist": ["orbit-wrap", "orbit", "orbit-", "*-primary-*"]
       }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
-      "env": {
-        "jest": true
+   },
+   "ignorePatterns": ["!**/*", ".next/**/*"],
+   "overrides": [
+      {
+         "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+         "rules": {
+            "@next/next/no-html-link-for-pages": ["error", "apps/client/pages"]
+         }
+      },
+      {
+         "files": ["*.ts", "*.tsx"],
+         "rules": {}
+      },
+      {
+         "files": ["*.js", "*.jsx"],
+         "rules": {}
+      },
+      {
+         "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+         "env": {
+            "jest": true
+         }
       }
-    }
-  ]
+   ]
 }
