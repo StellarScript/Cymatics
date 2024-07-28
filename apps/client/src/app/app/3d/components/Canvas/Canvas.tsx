@@ -21,9 +21,6 @@ export const CymaticCanvas = () => {
       }));
    };
 
-   const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
-   camera.zoom = 50;
-
    return (
       <div className="relative flex size-full flex-col lg:flex-row">
          <div className="flex size-full lg:w-2/6">
@@ -43,7 +40,7 @@ export const CymaticCanvas = () => {
                   <ambientLight intensity={0.5} />
                   <pointLight position={[10, 10, 10]} />
                   <Particles sliders={sliders} />
-                  <OrbitControls panSpeed={0.5} zoomSpeed={0.4} camera={camera} />
+                  <OrbitControls panSpeed={0.5} zoomSpeed={0.4} />
                   <EffectComposer>
                      <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
                   </EffectComposer>

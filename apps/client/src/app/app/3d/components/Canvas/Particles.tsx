@@ -45,6 +45,7 @@ export const Particles: React.FC<ParticlesProps> = ({ sliders }) => {
          dummy.position.set((particle.x - 0.5) * 10, (particle.y - 0.5) * 10, particle.z);
          dummy.updateMatrix();
          meshRef.current?.setMatrixAt(i, dummy.matrix);
+         meshRef.current?.position.set(0, 0, -3);
       });
 
       if (meshRef.current) {
