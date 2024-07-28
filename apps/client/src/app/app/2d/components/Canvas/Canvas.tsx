@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import P5 from 'p5';
 
 import { Particle } from './particals';
@@ -37,6 +38,7 @@ export const Canvas: React.FC = () => {
          [name]: value,
       };
    };
+
    const setupParticles = useCallback((p: P5) => {
       particles.current = [];
       for (let i = 0; i < settings.current.nParticles; i++) {
@@ -132,7 +134,14 @@ export const Canvas: React.FC = () => {
                inputs={sliders.current}
                toggleHeatMap={toggleHeatMap}
                onSliderChange={handleSliderChange}
-            />
+            >
+               <Link
+                  className="hover:bg-light-100 rounded-md border border-gray-100 bg-light-200 text-dark-100 hover:text-dark-200 p-3 transition-colors transition-200"
+                  href={'/app/3d'}
+               >
+                  View in 3D
+               </Link>
+            </Control>
          </div>
 
          <div className="relative w-full lg:w-4/6">
