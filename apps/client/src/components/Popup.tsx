@@ -11,7 +11,7 @@ export const Popup: React.FC<PopupProps> = ({ children, className, content }) =>
          <div className="relative w-full">
             <div
                className={cn(
-                  'absolute invisible group-hover:visible border rounded',
+                  'absolute invisible group-hover:visible border rounded transition transition-200',
                   'bg-[#0C111D] w-[14rem] mt-[0.5rem] ml-3 border-dark-100 px-3 py-1 text-dark-100',
                   className,
                )}
