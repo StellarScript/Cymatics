@@ -129,7 +129,7 @@ export const Canvas: React.FC = () => {
 
    return (
       <div className="relative flex size-full flex-col lg:flex-row">
-         <div className="flex size-full lg:w-2/6">
+         <div className="flex size-full lg:w-2/6 pt-3">
             <Control
                inputs={sliders.current}
                toggleHeatMap={toggleHeatMap}
