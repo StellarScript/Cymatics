@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import RangeSlider from '@client/components/Slider';
 import { ToggleTabs } from '@client/components/ToggleTabs';
+import { Icons } from '@client/components/Icons';
+import { Popup } from '@client/components/Popup';
 
 export interface ControlInputs {
    frequencyX: number;
@@ -24,7 +26,9 @@ export const Control: React.FC<ControlProps> = ({ children, onSliderChange, togg
       <div className="flex w-full flex-col items-center justify-center p-3 lg:justify-start">
          <fieldset className="w-80">
             <label className="flex flex-col items-center">
-               <Label>Wave Frequency in x-direction</Label>
+               <Label description="Controls the number of half-waves along the x-axis. Higher values increase the number of nodes in the x-direction">
+                  Wave Frequency in x-direction
+               </Label>
                <RangeSlider
                   min={1}
                   max={16}
@@ -36,7 +40,9 @@ export const Control: React.FC<ControlProps> = ({ children, onSliderChange, togg
             </label>
 
             <label className="flex flex-col items-center">
-               <Label>Wave Frequency in y-direction</Label>
+               <Label description="Controls the number of half-waves along the y-axis. Higher values increase the number of nodes in the y-direction">
+                  Wave Frequency in y-direction
+               </Label>
                <RangeSlider
                   min={1}
                   max={16}
@@ -48,7 +54,9 @@ export const Control: React.FC<ControlProps> = ({ children, onSliderChange, togg
             </label>
 
             <label className="flex flex-col items-center">
-               <Label>Amplitude Coefficient X</Label>
+               <Label description="Controls the amplitude of the sin(nx)sin(my) component of the wave pattern. Affects the overall shape and intensity of the pattern">
+                  Amplitude Coefficient X
+               </Label>
                <RangeSlider
                   min={-2}
                   max={2}
@@ -60,7 +68,10 @@ export const Control: React.FC<ControlProps> = ({ children, onSliderChange, togg
             </label>
 
             <label className="flex flex-col items-center">
-               <Label>Amplitude Coefficient Y</Label>
+               <Label description="Controls the amplitude of the sin(mx)sin(ny) component of the wave pattern. Affects the overall shape and intensity of the pattern">
+                  Amplitude Coefficient Y
+               </Label>
+
                <RangeSlider
                   min={-2}
                   max={2}
@@ -74,7 +85,9 @@ export const Control: React.FC<ControlProps> = ({ children, onSliderChange, togg
 
          <fieldset className="w-80">
             <label className="flex flex-col items-center">
-               <Label>Vibration Strength</Label>
+               <Label description="Controls the strength of the vibration. Higher values cause particles to move more vigorously">
+                  Vibration Strength
+               </Label>
                <RangeSlider
                   name="vibration"
                   min={0.01}
@@ -86,7 +99,9 @@ export const Control: React.FC<ControlProps> = ({ children, onSliderChange, togg
             </label>
 
             <label className="flex flex-col items-center">
-               <Label>Number of Particles</Label>
+               <Label description="Controls the number of particles used in the simulation. More particles provide higher resolution but may reduce performance">
+                  Number of Particles
+               </Label>
                <RangeSlider
                   name="particles"
                   min={2000}
@@ -109,8 +124,13 @@ export const Control: React.FC<ControlProps> = ({ children, onSliderChange, togg
    );
 };
 
-const Label: React.FC<React.PropsWithChildren> = ({ children }) => (
-   <small className="w-72 text-dark-100">
-      <>{children}</>
-   </small>
+const Label: React.FC<React.PropsWithChildren & { description: string }> = ({ children, description }) => (
+   <div className="w-72 flex flex-row items-center gap-1">
+      <small className="text-dark-100 ">
+         <>{children}</>
+      </small>
+      <Popup content={description} className="">
+         <Icons.InfoCircle className="size-3 text-dark-100/80 cursor-pointer" />
+      </Popup>
+   </div>
 );
