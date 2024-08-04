@@ -1,51 +1,73 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
-import { ControlInputs } from '@client/app/components/Control';
-import { Particle } from './particle';
 
-interface ParticlesProps {
-   sliders: ControlInputs;
+interface Sliders {
+   m: number;
+   n: number;
+   a: number;
+   b: number;
+   v: number;
+   num: number;
 }
 
-export const Particles: React.FC<ParticlesProps> = ({ sliders }) => {
-   const meshRef = useRef<THREE.InstancedMesh | null>(null);
+const pi = Math.PI;
+
+// Chladni 2D closed-form solution - returns between -1 and 1, used to calculate the z-coordinate for 3D effect
+const chladni = (x: number, y: number, a: number, b: number, m: number, n: number) =>
+   a * Math.sin(pi * n * x) * Math.sin(pi * m * y) + b * Math.sin(pi * m * x) * Math.sin(pi * n * y);
+
+class Particle {
+   x: number;
+   y: number;
+   z: number;
+   stochasticAmplitude: number;
+
+   constructor() {
+      this.x = Math.random();
+      this.y = Math.random();
+      this.z = 0;
+      this.stochasticAmplitude = 0;
+   }
+
+   move(a: number, b: number, m: number, n: number, v: number, minWalk: number) {
+      const eq = chladni(this.x, this.y, a, b, m, n);
+      this.stochasticAmplitude = v * Math.abs(eq);
+      if (this.stochasticAmplitude <= minWalk) this.stochasticAmplitude = minWalk;
+
+      this.x += THREE.MathUtils.randFloatSpread(this.stochasticAmplitude);
+      this.y += THREE.MathUtils.randFloatSpread(this.stochasticAmplitude);
+
+      // Ensure particles stay within bounds
+      this.x = Math.max(0, Math.min(1, this.x));
+      this.y = Math.max(0, Math.min(1, this.y));
+
+      // Ensure z is non-negative and adjust based on wave equation
+      this.z = Math.max(0, eq * 0.1); // Scale the z value to keep particles within a certain range
+   }
+}
+
+export const Particles: React.FC<{ sliders: Sliders }> = ({ sliders }) => {
+   const meshRef = useRef<THREE.InstancedMesh>(null);
    const particles = useRef<Particle[]>([]);
-   const smoothSliders = useRef<ControlInputs>({ ...sliders });
 
    useEffect(() => {
       particles.current = [];
-      for (let i = 0; i < sliders.particles; i++) {
+      for (let i = 0; i < sliders.num; i++) {
          particles.current.push(new Particle());
       }
-   }, [sliders.particles]);
+   }, [sliders.num]);
 
    useFrame(() => {
+      const { m, n, a, b, v } = sliders;
       const minWalk = 0.002;
       const dummy = new THREE.Object3D();
 
-      // Interpolate slider values for smooth transition
-      smoothSliders.current.frequencyX += (sliders.frequencyX - smoothSliders.current.frequencyX) * 0.1;
-      smoothSliders.current.frequencyY += (sliders.frequencyY - smoothSliders.current.frequencyY) * 0.1;
-      smoothSliders.current.amplitudeX += (sliders.amplitudeX - smoothSliders.current.amplitudeX) * 0.1;
-      smoothSliders.current.amplitudeY += (sliders.amplitudeY - smoothSliders.current.amplitudeY) * 0.1;
-      smoothSliders.current.vibration += (sliders.vibration - smoothSliders.current.vibration) * 0.1;
-
       particles.current.forEach((particle, i) => {
-         particle.move(
-            smoothSliders.current.amplitudeX,
-            smoothSliders.current.amplitudeY,
-            smoothSliders.current.frequencyX,
-            smoothSliders.current.frequencyY,
-            smoothSliders.current.vibration,
-            minWalk,
-         );
+         particle.move(a, b, m, n, v, minWalk);
          dummy.position.set((particle.x - 0.5) * 10, (particle.y - 0.5) * 10, particle.z);
          dummy.updateMatrix();
          meshRef.current?.setMatrixAt(i, dummy.matrix);
-         meshRef.current?.position.set(0, 0, -3);
       });
 
       if (meshRef.current) {
@@ -54,9 +76,9 @@ export const Particles: React.FC<ParticlesProps> = ({ sliders }) => {
    });
 
    return (
-      <instancedMesh ref={meshRef} args={[undefined, undefined, sliders.particles]}>
-         <sphereGeometry args={[0.01, 8, 8]} />
-         <meshStandardMaterial color="hotpink" />
+      <instancedMesh ref={meshRef} args={[undefined, undefined, sliders.num]}>
+         <sphereGeometry args={[0.02, 8, 8]} />
+         <meshStandardMaterial color="sandybrown" />
       </instancedMesh>
    );
 };

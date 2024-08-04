@@ -12,7 +12,7 @@ export default function AppPage() {
             <div className="flex h-full grow flex-col">
                <div className="flex flex-1 justify-center px-40 py-5">
                   <div className="flex w-full flex-col items-center justify-center">
-                     <div className="mb-5 flex flex-col gap-2 text-center">
+                     <div className="text-light-200 mb-5 flex flex-col gap-2 text-center">
                         <h1 className="text-4xl font-black leading-tight tracking-[-0.033em] text-white">
                            Explore Chladni Cymatics Visualization
                         </h1>

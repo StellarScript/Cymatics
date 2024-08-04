@@ -18,12 +18,15 @@ export class Particle {
       const eq = chladni(this.x, this.y, a, b, m, n);
       this.stochasticAmplitude = v * Math.abs(eq);
       if (this.stochasticAmplitude <= minWalk) this.stochasticAmplitude = minWalk;
+
       this.x += THREE.MathUtils.randFloatSpread(this.stochasticAmplitude);
       this.y += THREE.MathUtils.randFloatSpread(this.stochasticAmplitude);
-      if (this.x < 0) this.x = 0;
-      if (this.x > 1) this.x = 1;
-      if (this.y < 0) this.y = 0;
-      if (this.y > 1) this.y = 1;
-      this.z = eq;
+
+      // Ensure particles stay within bounds
+      this.x = Math.max(0, Math.min(1, this.x));
+      this.y = Math.max(0, Math.min(1, this.y));
+
+      // Ensure z is non-negative and adjust based on wave equation
+      this.z = Math.max(0, eq * 0.1); // Scale the z value to keep particles within a certain range
    }
 }
