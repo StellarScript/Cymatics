@@ -2,7 +2,10 @@
    "name": "@cymatic/source",
    "version": "0.0.0",
    "license": "MIT",
-   "scripts": {},
+   "scripts": {
+      "build": "next build",
+      "start": "next start"
+   },
    "private": true,
    "dependencies": {
       "@t3-oss/env-nextjs": "^0.11.0",
