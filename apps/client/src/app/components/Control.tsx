@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import RangeSlider from '@client/components/Slider';
 import { ToggleTabs } from '@client/components/ToggleTabs';
 import { Icons } from '@client/components/Icons';
@@ -125,12 +124,12 @@ export const Control: React.FC<ControlProps> = ({ children, onSliderChange, togg
 };
 
 const Label: React.FC<React.PropsWithChildren & { description: string }> = ({ children, description }) => (
-   <div className="w-72 flex flex-row items-center gap-1">
-      <small className="text-dark-100 ">
+   <div className="flex w-72 flex-row items-center gap-1">
+      <small className="text-light-100/80">
          <>{children}</>
       </small>
       <Popup content={description} className="">
-         <Icons.InfoCircle className="size-3 text-dark-100/80 cursor-pointer" />
+         <Icons.InfoCircle className="text-light-100/80 size-3 cursor-pointer" />
       </Popup>
    </div>
 );

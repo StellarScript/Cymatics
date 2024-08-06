@@ -57,7 +57,7 @@ export const CymaticCanvas: React.FC = () => {
                </Link>
             </Control>
          </div>
-         <div className="flex size-full pt-3 lg:w-2/6">
+         <div className="flex size-full pt-3 lg:w-9/12">
             <Canvas>
                <ambientLight intensity={0.5} />
                <pointLight position={[10, 10, 10]} />
