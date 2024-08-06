@@ -1,8 +1,22 @@
-# Certainly! Here's a comprehensive documentation for the project:
-
 ## 3D Chladni Patterns Visualization
 
-Overview
+## Getting started
+
+**_Installation_**
+
+```
+yarn install
+```
+
+**_Start Project_**
+
+```sh
+yarn nx serve:dev client
+```
+
+</br>
+
+**Overview**
 This project is a 3D visualization of Chladni patterns using Three.js and React. Chladni patterns are formed by particles moving and settling at nodes on a vibrating surface, creating intricate and visually appealing designs. The simulation allows for real-time interaction through adjustable parameters, enabling users to explore different patterns dynamically.
 
 **_Features_**
