@@ -129,14 +129,14 @@ export const Canvas: React.FC = () => {
 
    return (
       <div className="relative flex size-full flex-col lg:flex-row">
-         <div className="flex size-full lg:w-2/6 pt-3">
+         <div className="flex size-full pt-3 lg:w-2/6">
             <Control
                inputs={sliders.current}
                toggleHeatMap={toggleHeatMap}
                onSliderChange={handleSliderChange}
             >
                <Link
-                  className="hover:bg-light-100 rounded-md border border-gray-100 bg-light-200 text-dark-100 hover:text-dark-200 p-3 transition-colors transition-200"
+                  className="hover:bg-light-100 bg-light-200 text-dark-100 hover:text-dark-200 transition-200 rounded-md border border-gray-100 p-3 transition-colors"
                   href={'/app/3d'}
                >
                   View in 3D
